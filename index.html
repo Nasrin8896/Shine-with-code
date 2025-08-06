@@ -1,0 +1,54 @@
+let readerName = "Nasrin";
+let month = "August";
+
+let titles = ["Book A", "Book B", "Book C"];
+let totalPages = [200, 150, 300];
+let pagesRead = [200, 80, 50];
+
+function calculateProgress(pages, total) {
+  return Math.round((pages / total) * 100);
+}
+
+function getReadingStatus(percent) {
+  if (percent === 100) return "Finished";
+  else if (percent >= 50) return "In Progress";
+  else return "Just Started";
+}
+
+function printBookSummary(title, pages, total) {
+  let percent = calculateProgress(pages, total);
+  let status = getReadingStatus(percent);
+  console.log(`title:{pages}/total pages read -{status}`);
+}
+
+for (let i = 0; i < titles.length; i++) {
+  printBookSummary(titles[i], pagesRead[i], totalPages[i]);
+}
+
+function totalPagesRead(pagesArray) {
+  let sum = 0;
+  for (let i = 0; i < pagesArray.length; i++) {
+    sum += pagesArray[i];
+  }
+  return sum;
+}
+
+function findBookWithMostPagesLeft(titles, readPages, totalPages) {
+  let maxLeft = 0;
+  let book = "";
+  for (let i = 0; i < titles.length; i++) {
+    let left = totalPages[i] - readPages[i];
+    if (left > maxLeft) {
+      maxLeft = left;
+      book = titles[i];
+    }
+}
+
+function printReadingSummary(name, month, pagesReadArray) {
+  let total = totalPagesRead(pagesReadArray);
+  console.log(`name's reading progress for{month}: ${total} pages read.`);
+}
+
+printReadingSummary(readerName, month, pagesRead);
+console.log("Book with most pages left: " + findBookWithMostPagesLeft(titles, pagesRead, totalPages))
+..
